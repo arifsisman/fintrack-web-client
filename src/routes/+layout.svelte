@@ -1,13 +1,12 @@
 <script>
-	import '@skeletonlabs/skeleton/themes/theme-skeleton.css';
 	import '@skeletonlabs/skeleton/styles/all.css';
-	import '../app.postcss';
-	import Navigation from '$lib/Navigation/Navigation.svelte';
+	import '@fintrack/theme.postcss';
+	import '@fintrack/app.postcss';
+	import Navigation from '@fintrack/lib/navigation/navigation.svelte'; // or import Navigation from '$lib/navigation/navigation.svelte'
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
 	import { Drawer, drawerStore } from '@skeletonlabs/skeleton';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
-	// import GoogleAuth from "@fintrack/lib/components/google-auth/GoogleAuth.svelte";
 
 	let loginRef;
 
@@ -32,7 +31,7 @@
 		console.log(response);
 	}
 
-	$: classesSidebar = $page.url.pathname === '/' ? 'w-0' : 'w-0 lg:w-64';
+	$: classesSidebar = $page.url.pathname === '/' ? '' : '';
 </script>
 
 <!-- App Shell -->
