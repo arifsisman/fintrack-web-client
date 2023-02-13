@@ -6,9 +6,30 @@
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
 	import { Drawer, drawerStore } from '@skeletonlabs/skeleton';
 	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
+	// import GoogleAuth from "@fintrack/lib/components/google-auth/GoogleAuth.svelte";
+
+	let loginRef;
+
+	onMount(() => {
+		const google = window.google;
+
+		google.accounts.id.initialize({
+			client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+			callback: handleCredentialResponse
+		});
+		google.accounts.id.prompt();
+		google.accounts.id.renderButton(loginRef, {
+			size: 'large'
+		});
+	});
 
 	function drawerOpen() {
 		drawerStore.open({});
+	}
+
+	function handleCredentialResponse(response) {
+		console.log(response);
 	}
 
 	$: classesSidebar = $page.url.pathname === '/' ? 'w-0' : 'w-0 lg:w-64';
@@ -38,6 +59,10 @@
 					</button>
 					<strong class="text-xl">FinTrack</strong>
 				</div>
+			</svelte:fragment>
+
+			<svelte:fragment slot="trail">
+				<div bind:this={loginRef} />
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>

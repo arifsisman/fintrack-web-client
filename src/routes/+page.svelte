@@ -1,5 +1,4 @@
 <script>
-	import { onMount } from 'svelte';
 </script>
 
 <div class="container p-10 space-y-4">
